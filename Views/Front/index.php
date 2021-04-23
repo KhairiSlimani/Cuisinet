@@ -25,44 +25,10 @@
 </head>
 <body>
 
-	<div class="wrap">
-		<div class="container">
-			<div class="row justify-content-between">
-				<div class="col-12 col-md d-flex align-items-center">
-					<p class="mb-0 phone"><span class="mailus">Numero de téléphone:</span> <a href="#">+00 1234 567</a> ou <span class="mailus">Envoyez-nous un email:</span> <a href="#">cuisinet@gmail.com</a></p>
-				</div>
-				<div class="col-12 col-md d-flex justify-content-md-end">
-					<p class="mb-0">Lundi - Mardi / 9:00-21:00, Samedi - Dimanche / 10:00-20:00</p>
-					<div class="social-media">
-						<p class="mb-0 d-flex">
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
-							<a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-		<div class="container">
-			<a class="navbar-brand" href="index.html">Cuisi<span>net</span></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="oi oi-menu"></span> Menu
-			</button>
+	<!-- header -->
+		<?php $page="Accueil"; include "header.php"; ?>
+	<!-- END header -->
 
-			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-					<li class="nav-item"><a href="employés.html" class="nav-link">Employés</a></li>
-					<li class="nav-item"><a href="s'inscrire.html" class="nav-link">S'inscrire</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<!-- END nav -->
 	
 	<section class="hero-wrap">
 		<div class="home-slider owl-carousel js-fullheight">
@@ -660,10 +626,9 @@
 				<div class="col-md-6 ftco-animate makereservation p-4 p-md-5">
 					<div class="heading-section ftco-animate mb-5">
 						<span class="subheading">Ce sont nos secrets</span>
-						<h2 class="mb-4">Ingrédients parfaits</h2>
-						<p>Nous utilisons de nombreux ingrédients merveilleux et rares dans nos plats
+						<h2 class="mb-4">Plats parfaits et bon service</h2>
+						<p>Nous utilisons de nombreux ingrédients exquis et rares dans nos plats et faisons en sorte que le client se sente comme chez lui
 						</p>
-						<p><a href="#" class="btn btn-primary">Apprendre encore plus</a></p>
 					</div>
 				</div>
 			</div>
@@ -745,93 +710,27 @@
 		</div>
 	</section>
 
-	<footer class="ftco-footer ftco-no-pb ftco-section">
-		<div class="container">
-			<div class="row mb-5">
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Cuisinet</h2>
-						<p>Suivez-nous sur les pages des réseaux sociaux</p>
-						<ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-							<li class="ftco-animate"><a href="#"><span class="fa fa-twitter"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="fa fa-facebook"></span></a></li>
-							<li class="ftco-animate"><a href="#"><span class="fa fa-instagram"></span></a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Heures d'ouverture</h2>
-						<ul class="list-unstyled open-hours">
-							<li class="d-flex"><span>Lundi</span><span>9:00 - 24:00</span></li>
-							<li class="d-flex"><span>Mardi</span><span>9:00 - 24:00</span></li>
-							<li class="d-flex"><span>Mercredi</span><span>9:00 - 24:00</span></li>
-							<li class="d-flex"><span>Jeudi</span><span>9:00 - 24:00</span></li>
-							<li class="d-flex"><span>Vendredi</span><span>9:00 - 02:00</span></li>
-							<li class="d-flex"><span>Samedi</span><span>9:00 - 02:00</span></li>
-							<li class="d-flex"><span>Dimanche</span><span> Closed</span></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Instagram</h2>
-						<div class="thumb d-sm-flex">
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-1.jpg);">
-							</a>
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-2.jpg);">
-							</a>
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-3.jpg);">
-							</a>
-						</div>
-						<div class="thumb d-flex">
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-4.jpg);">
-							</a>
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-5.jpg);">
-							</a>
-							<a href="#" class="thumb-menu img" style="background-image: url(images/insta-6.jpg);">
-							</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-lg-3">
-					<div class="ftco-footer-widget mb-4">
-						<h2 class="ftco-heading-2">Newsletter</h2>
-						<p>Si vous souhaitez recevoir toutes les nouveautés de notre restaurant sur votre e-mail.</p>
-						<form action="#" class="subscribe-form">
-							<div class="form-group">
-								<input type="text" class="form-control mb-2 text-center" placeholder="Enter email address">
-								<input type="submit" value="Subscribe" class="form-control submit px-3">
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container-fluid px-0 bg-primary py-3">
-		</footer>
-		
-
-		<!-- loader -->
-		<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+	<!-- footer -->
+		<?php require_once "footer.php"; ?>				
+	<!-- END footer -->
 
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
-		<script src="js/jquery.stellar.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/jquery.magnific-popup.min.js"></script>
-		<script src="js/jquery.animateNumber.min.js"></script>
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/jquery.timepicker.min.js"></script>
-		<script src="js/scrollax.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="js/google-map.js"></script>
-		<script src="js/main.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/jquery.timepicker.min.js"></script>
+	<script src="js/scrollax.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+	<script src="js/google-map.js"></script>
+	<script src="js/main.js"></script>
 		
 	</body>
 	</html>
