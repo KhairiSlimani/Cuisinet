@@ -61,7 +61,7 @@
 							<span class="position mb-2"><?PHP echo $row['titreEmploi']; ?></span>
 							<div class="faded">
 								<p>Age: <?PHP echo $row['age']; ?></p>
-								<p>Numero de téléphone: <?PHP echo $row['numeroTelephone']; ?></p>
+								<p>Tel: <?PHP echo $row['numeroTelephone']; ?></p>
 								<ul class="ftco-social d-flex">
 									<li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
 									<li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>

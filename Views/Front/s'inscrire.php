@@ -1,3 +1,55 @@
+<?php //require_once 'topbar.php'?>
+
+<?php
+include_once '../../Model/clients.php';
+include_once '../../Controller/clientC.php';
+
+$error = "";
+
+// create employe
+$client = null;
+
+// create an instance of the controller
+$clientC = new clientC();
+if (
+
+    isset($_POST["username"]) &&
+    isset($_POST["password"]) &&
+    isset($_POST["email"]) &&
+    isset($_POST["phone"]) 
+
+) {
+    if (
+        !empty($_POST["username"]) &&
+        !empty($_POST["password"]) &&
+        !empty($_POST["email"]) &&
+        !empty($_POST["phone"]) 
+    ) {
+        $Client = new Client(
+
+            $_POST["username"],
+            $_POST['password'],
+            $_POST['email'],
+            $_POST['phone']
+        );
+        if( $clientC->verifierClient($_POST["username"]) == 0 )
+        {
+            $clientC->ajouterClient($Client);
+        }
+        else
+        {
+            echo "<script> alert('Username Already Exist') </script>";
+        }
+
+        
+    } else
+        echo "Missing information";
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +74,7 @@
 	
 	<link rel="stylesheet" href="css/flaticon.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/controleSaisieProfil.js"></script>
 </head>
 <body>
 
@@ -34,79 +87,37 @@
 			<div class="row no-gutters">
 				<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
 
-				
-					<?php
-						
-						if(isset($_GET["error"])){
-
-							if($_GET["error"]=="emptyfields"){
-							
-								echo"<p>Fill in all fields </p>";
-							}
-							else if($_GET["error"]=="invalidmailname"){
-								echo"<p>Invalid mail and username </p>";
-							
-							}
-							else if($_GET["error"]=="invalidmail"){
-								echo"<p>Invalid mail </p>";
-							
-							}
-							else if($_GET["error"]=="invalidname"){
-								echo"<p>Invalid username</p>";
-							
-							}
-							else if($_GET["error"]=="usernamealredytaken"){
-								echo"<p>Username is already taken</p>";
-							
-							}
-						
-							else if($_GET["signup"]=="success"){
-								echo"<p>Sign up successfuly!</p>";
-							}
-						}     
-						        
-					?>
-
-					<form action="includes/signupinc.php" method="post" class="appointment-form">
+					<form method="post" action="" id="form" class="appointment-form">
 						<h3 class="mb-3">Créer un compte</h3>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="name" name="username" class="form-control" placeholder="Nom d'utilisateur">
+									<input type="name" name="username" id="username" class="form-control" placeholder="Nom d'utilisateur">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" name="password" class="form-control" placeholder="Mot de passe">
+									<input type="text" name="password" id="password" class="form-control" placeholder="Mot de passe">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="email" name="email" class="form-control" placeholder="Email">
+									<input type="text" name="confirmation" id="confirmation" class="form-control" placeholder="Répéter Le Mot de passe">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" name="phone" class="form-control" placeholder="Phone">
+									<input type="text" name="email" id="email" class="form-control" placeholder="Email">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<div class="form-field">
-										<div class="select-wrap">
-											<div class="icon"><span class="fa fa-chevron-down"></span></div>
-											<select name="sexe" id="sexe" class="form-control">
-												<option value="Sexe">Sexe</option>
-												<option value="Male">Male</option>
-												<option value="Femelle">Femelle</option>
-											</select>
-										</div>
-									</div>
+									<input type="text" name="phone" id="phone" class="form-control" placeholder="Phone">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="submit" value="Enregistrer" name="signup_submit" class="btn btn-white py-3 px-4">
+									<input type="submit" value="Enregistrer" name="signup_submit" onclick="verif();" class="btn btn-white py-3 px-4">
 								</div>
 							</div>
 							<div class="col-md-12">
@@ -117,6 +128,9 @@
 
 						</div>
 					</form>
+					
+					<div id="erreur">  </div>
+
   				</div>
   				<div class="col-sm-8 wrap-about py-5 ftco-animate img" style="background-image: url(images/about.jpg);">
   					<div class="row pb-5 pb-md-0">

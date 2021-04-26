@@ -1,53 +1,7 @@
-<?php 
-
-	include "../../Controller/clientC.php";
-
-	$clientC = new clientC();
-	$listeClients = $clientC->afficherClient();
-
-?>
 
 <?php
 include_once '../../Controller/clientC.php';
 include_once '../../Model/clients.php';
-
-
-$error = "";
-
-// create client
-$client = null;
-
-// create an instance of the controller
-$clientCC = new clientC();
-if (
-
-    isset($_POST["username"]) &&
-    isset($_POST["password"]) &&
-    isset($_POST["email"]) &&
-    isset($_POST["phone"]) &&
-    isset($_POST["sexe"]) 
-
-) {
-    if (
-        !empty($_POST["username"]) &&
-        !empty($_POST["password"]) &&
-        !empty($_POST["email"]) &&
-        !empty($_POST["phone"]) &&
-        !empty($_POST["sexe"]) 
-    ) {
-        $Client = new Client(
-
-            $_POST["username"],
-            $_POST['password'],
-            $_POST['email'],
-            $_POST['phone'],
-            $_POST['sexe']
-        );
-        $clientCC->modifierClient($Client, $_GET['id']);
-        header('refresh:1;url=profil.php');
-    } else
-        echo "Missing information";
-}
 
 ?>
 
@@ -92,37 +46,34 @@ if (
 						<h3 class="mb-3">PROFIL</h3>
 						<div class="row">
                         <?PHP
-					        foreach ($listeClients as $row)
-                            {
+
+							$clientC = new clientC();
+							$client = $clientC->recupererClient($_SESSION['id']);
+							
 				        ?>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="name" name="username" class="form-control" value="<?PHP echo $row['username']; ?>" disabled>
+                                    <input type="name" name="username" class="form-control" value="<?PHP echo $client['username']; ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="password" class="form-control" value="<?PHP echo $row['password']; ?>" disabled>
+                                    <input type="text" name="password" class="form-control" value="<?PHP echo $client['password']; ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" value="<?PHP echo $row['email']; ?>" disabled>
+                                    <input type="email" name="email" class="form-control" value="<?PHP echo $client['email']; ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" name="phone" class="form-control" value="<?PHP echo $row['phone']; ?>" disabled>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" name="sexe" class="form-control" value="<?PHP echo $row['sexe']; ?>" disabled>
+                                    <input type="text" name="phone" class="form-control" value="<?PHP echo $client['phone']; ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
 								<div class="form-group">
-									<input id="bt" onclick="modifier()" type="button" value="Modifier les informations" class="btn btn-white py-3 px-4">
+									<a href="modifierProfil.php?id=<?PHP echo $client['id']; ?>"><input id="bt" type="button" value="Modifier les informations" class="btn btn-white py-3 px-4"></a>
 								</div>
 							</div>
 
@@ -163,10 +114,6 @@ if (
         <!-- footer -->
 		    <?php require_once "footer.php"; ?>				
 	    <!-- END footer -->
-
-        <?PHP
-			}
-		?>
 
 
 			<script src="js/jquery.min.js"></script>

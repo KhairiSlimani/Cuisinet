@@ -1,3 +1,52 @@
+<?php //require_once 'topbar.php'?>
+
+<?php
+include_once '../../Model/clients.php';
+include_once '../../Controller/clientC.php';
+
+$error = "";
+
+// create employe
+$client = null;
+
+// create an instance of the controller
+$clientC = new clientC();
+if (
+
+    isset($_POST["username"]) &&
+    isset($_POST["password"]) 
+
+) {
+    if (
+        !empty($_POST["username"]) &&
+        !empty($_POST["password"]) 
+    ) {
+
+		if($clientC->connecterClient($_POST["username"] , $_POST["password"]) != false)
+		{
+			$clientC = new clientC();
+			$client = $clientC->recupererClientUS($_POST["username"]);
+			session_start();
+			$_SESSION['username'] = $client['username'];
+			$_SESSION['id'] = $client['id'];
+			$_SESSION['etat'] = 1;
+			//echo '<a href="../index.php?link=' . $etat . '></a>';
+			header("Location: index.php?login=success");
+			exit();
+
+		}
+		else
+		{
+			echo "<script> alert('Wrong Informations!') </script>";
+		}
+        
+    } else
+        echo "Missing information";
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +82,18 @@
 		<div class="container">
 			<div class="row no-gutters">
 				<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
-					<form action="includes/logininc.php" method="post" class="appointment-form">
+					<form action="" method="post" class="appointment-form">
 						<h3 class="mb-3">S'identifier</h3>
 						<div class="row">
+							<?PHP
+								if (isset($_GET['username'])) {
+
+									$clientC = new clientC();
+									$client = $clientC->recupererClientUS($_GET['username']);
+								}
+								
+							?>
+
 							<div class="col-md-12">
 								<div class="form-group">
 									<input type="text" name="username" class="form-control" placeholder="Nom d'utilisateur">

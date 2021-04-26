@@ -1,4 +1,21 @@
-<?php //require_once 'topbar.php'?>
+<?php
+	session_start(); 
+?>
+
+<?php
+	if( $_SESSION["etat"] != 1)
+	{
+		echo "<script type='text/javascript'>";
+            echo "alert('Please login first!');
+            window.location.href='login.php';";
+		echo "</script>";
+		
+	}
+    else
+    {
+        $admin =  $_SESSION["username"];
+    }
+?>
 
 <?php
 include_once '../../Model/employes.php';
@@ -74,7 +91,7 @@ if (
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/controleSaisieEmploye.js"></script>
 </head>
 
 <body id="page-top">
@@ -90,6 +107,11 @@ if (
 
             <!-- Main Content -->
             <div id="content">
+
+                <!-- Topbar -->
+                    <?php $usr=$admin; include "topbar.php"; ?>
+                <!-- End of Topbar -->
+
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -149,7 +171,8 @@ if (
                         <button id="sbb" type="submit" value="Envoyer" class="btn btn-primary" onclick="verif();">Ajouter</button>
 
                     </form>
-                
+                    <br>
+                    <div id="error" style="color :red;"></div>
 
                 </div>
                 <!-- /.container-fluid -->

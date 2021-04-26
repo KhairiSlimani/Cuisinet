@@ -1,3 +1,22 @@
+<?php
+	session_start(); 
+?>
+
+<?php
+	if( $_SESSION["etat"] != 1)
+	{
+		echo "<script type='text/javascript'>";
+            echo "alert('Please login first!');
+            window.location.href='login.php';";
+		echo "</script>";
+		
+	}
+    else
+    {
+        $admin =  $_SESSION["username"];
+    }
+?>
+
 <?php //require_once 'topbar.php'?>
 
 <?php
@@ -75,6 +94,7 @@ if (
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+    <script src="js/controleDeSaisieEmploye.js"></script>
 </head>
 
 <body id="page-top">
@@ -91,6 +111,10 @@ if (
             <!-- Main Content -->
             <div id="content">
 
+                <!-- Topbar -->
+                    <?php $usr=$admin; include "topbar.php"; ?>
+                <!-- End of Topbar -->
+
                 <!-- Begin Page Content -->
 
                 <div id="error">
@@ -105,7 +129,7 @@ if (
 
                 <div class="container-fluid">
 
-                    <form method="post" action="">
+                    <form method="post" action="" id="form">
 
                         <div class="form-group">
                             <label for="nom">Entrer le nom de l'employé</label>
@@ -157,9 +181,13 @@ if (
                         </div>
 
 
-                        <button type="submit" value="Envoyer" class="btn btn-primary">Modifier</button>
+                        <button type="submit" value="Envoyer" class="btn btn-primary" onclick="verif();">Modifier</button>
 
                     </form>
+
+                    <br>
+                    <div id="erreur"></div>
+
 
                 </div>
                 <!-- /.container-fluid -->

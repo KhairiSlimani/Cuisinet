@@ -5,9 +5,7 @@ class Client
     private $username;
     private $password;
     private $email;
-    private $phone;
-    private $sexe;
-    
+    private $phone;    
 
     public function getUsername()
     {
@@ -24,10 +22,6 @@ class Client
     public function getPhone()
     {
         return $this->phone;
-    }
-    public function getSexe()
-    {
-        return $this->sexe;
     }
 
     public function setUsername($username)
@@ -46,17 +40,12 @@ class Client
     {
         $this->phone = $phone;
     }
-    public function setSexe($sexe)
-    {
-        $this->sexe = $sexe;
-    }
 
-    public function __construct($username , $password , $email , $phone , $sexe)
+    public function __construct($username , $password , $email , $phone)
     {
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
         $this->phone = $phone;
-        $this->sexe = $sexe;
     }
 }

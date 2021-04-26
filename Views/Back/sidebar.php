@@ -14,7 +14,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -27,45 +27,22 @@
         Interface
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
-            </div>
-        </div>
-    </li>
-
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-            </div>
-        </div>
-    </li>
-
-
     <!-- Khayri.php-->
 
     <li class="nav-item">
+
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAdmin" aria-expanded="true" aria-controls="collapseAdmin">
+            <i class=""></i>
+            <span>ADMINS</span>
+        </a>
+        <div id="collapseAdmin" class="collapse" aria-labelledby="headingAdmin" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gérer Les admins</h6>
+                <a class="collapse-item" href="ajouterAdmin.php">Ajouter un Admin</a>
+                <a class="collapse-item" href="afficherAdmin.php">Afficher Les Admins</a>
+            </div>
+        </div>
+
 
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployes" aria-expanded="true" aria-controls="collapseEmployes">
             <i class=""></i>
@@ -74,8 +51,8 @@
         <div id="collapseEmployes" class="collapse" aria-labelledby="headingEmployes" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Gérer les employés:</h6>
-                <a class="collapse-item" href="ajouterEmploye.php">Ajouter un employé</a>
-                <a class="collapse-item" href="afficherEmployes.php">Afficher les employés</a>
+                <a class="collapse-item" href="ajouterEmploye.php">Ajouter un Employé</a>
+                <a class="collapse-item" href="afficherEmployes.php">Afficher Les employés</a>
 
             </div>
         </div>
@@ -87,8 +64,8 @@
         <div id="collapseClients" class="collapse" aria-labelledby="headingEmployes" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Gérer les clients:</h6>
-                <a class="collapse-item" href="ajouterClient.php">Ajouter un client</a>
-                <a class="collapse-item" href="afficherClients.php">Afficher les clients</a>
+                <a class="collapse-item" href="ajouterClient.php">Ajouter un Client</a>
+                <a class="collapse-item" href="afficherClients.php">Afficher Les clients</a>
 
             </div>
         </div>

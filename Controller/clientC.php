@@ -5,8 +5,8 @@
 
         public function ajouterClient($client)
         {
-            $sql = "INSERT INTO clients (username, password, email, phone, sexe) 
-            VALUES (:username, :password, :email, :phone, :sexe)";
+            $sql = "INSERT INTO clients (username, password, email, phone) 
+            VALUES (:username, :password, :email, :phone)";
     
             $db = config::getConnexion();
             try {
@@ -16,14 +16,44 @@
                     'username' => $client->getUsername(),
                     'password' => $client->getPassword(),
                     'email' => $client->getEmail(),
-                    'phone' => $client->getPhone(),
-                    'sexe' => $client->getSexe()
+                    'phone' => $client->getPhone()
     
                 ]);
             } catch (Exception $e) {
                 echo 'Erreur: ' . $e->getMessage();
             }
         }
+
+        public function verifierClient($username)
+        {
+            $sql = "SELECT * from clients where username='$username' ";
+            $db = config::getConnexion();
+            try {
+                $query = $db->prepare($sql);
+                $query->execute();
+                $result = $query->rowCount();
+                return $result;
+            } catch (Exception $e) {
+                die('Erreur: ' . $e->getMessage());
+            }
+        }
+
+        public function connecterClient($username , $password)
+        {
+            $sql = "SELECT * from clients where username='$username' and password='$password' ";
+            $db = config::getConnexion();
+            try {
+                $query = $db->prepare($sql);
+                $query->execute();
+    
+                $user = $query->fetch();
+                return $user;
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+
+
 
         public function afficherClient()
         {
@@ -61,8 +91,7 @@
                             username = :username,
                             password = :password,
                             email = :email,
-                            phone = :phone,
-                            sexe = :sexe
+                            phone = :phone
                         WHERE id = :id'
                 );
                 $query->execute([
@@ -70,8 +99,7 @@
                     'username' =>  $client->getUsername(),
                     'password' => $client->getPassword(),
                     'email' => $client->getEmail(),
-                    'phone' => $client->getPhone(),
-                    'sexe' => $client->getSexe()
+                    'phone' => $client->getPhone()
                                  
                 ]);
                 echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -94,6 +122,22 @@
                 die('Erreur: ' . $e->getMessage());
             }
         }
+
+        public function recupererClientUS($username)
+        {
+            $sql = "SELECT * from clients where username='$username' ";
+            $db = config::getConnexion();
+            try {
+                $query = $db->prepare($sql);
+                $query->execute();
+    
+                $user = $query->fetch();
+                return $user;
+            } catch (Exception $e) {
+                die('Erreur: ' . $e->getMessage());
+            }
+        }
+
 
     
         public function recherche($search_value)
@@ -128,6 +172,22 @@
                 die('Erreur: ' . $e->getMessage());
             }
         }
+
+        public function trieCroissant($page, $perPage)
+        {
+            $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
+            $sql = "SELECT * FROM clients order by username LIMIT {$start},{$perPage}";
+            $db = config::getConnexion();
+            try {
+                $liste = $db->prepare($sql);
+                $liste->execute();
+                $liste = $liste->fetchAll(PDO::FETCH_ASSOC);
+                return $liste;
+            } catch (Exception $e) {
+                die('Erreur: ' . $e->getMessage());
+            }
+        }
+
     
     
         public function calcTotalRows($perPage)

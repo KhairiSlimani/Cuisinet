@@ -41,6 +41,7 @@
             }
         }
 
+
         public function supprimerEmploye($id)
         {
             $sql = "DELETE FROM employes WHERE idEmploye = :idEmploye";
@@ -126,7 +127,7 @@
         public function pagination($page, $perPage)
         {
             $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
-            $sql = "SELECT * FROM employes LIMIT {$start},{$perPage}";
+            $sql = "SELECT * FROM employes LIMIT {$start},{$perPage} ";
             $db = config::getConnexion();
             try {
                 $liste = $db->prepare($sql);
@@ -137,6 +138,22 @@
                 die('Erreur: ' . $e->getMessage());
             }
         }
+
+        public function trieCroissant($page, $perPage)
+        {
+            $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
+            $sql = "SELECT * FROM employes order by age LIMIT {$start},{$perPage} ";
+            $db = config::getConnexion();
+            try {
+                $liste = $db->prepare($sql);
+                $liste->execute();
+                $liste = $liste->fetchAll(PDO::FETCH_ASSOC);
+                return $liste;
+            } catch (Exception $e) {
+                die('Erreur: ' . $e->getMessage());
+            }
+        }
+
     
     
         public function calcTotalRows($perPage)

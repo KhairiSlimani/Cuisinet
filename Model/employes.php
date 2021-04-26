@@ -1,13 +1,13 @@
 <?php
     class Employe {
-        private   $nom;
-        private   $prenom;
-        private   $age;
-        private   $sexe;
-        private   $titreEmploi;
-        private   $salaire;
-        private   $numeroTelephone;
-        private   $photo;
+        private  string $nom;
+        private  string $prenom;
+        private  int $age;
+        private  string $sexe;
+        private  string $titreEmploi;
+        private  int $salaire;
+        private  int $numeroTelephone;
+        private  string $photo;
 
         public function __construct($nom, $prenom, $age, $sexe, $titreEmploi, $salaire, $numeroTelephone, $photo){
             //$this->idEmploye = $id;

@@ -1,4 +1,21 @@
-<?php //require_once 'topbar.php'?>
+<?php
+	session_start(); 
+?>
+
+<?php
+	if( $_SESSION["etat"] != 1)
+	{
+		echo "<script type='text/javascript'>";
+            echo "alert('Please login first!');
+            window.location.href='login.php';";
+		echo "</script>";
+		
+	}
+    else
+    {
+        $admin =  $_SESSION["username"];
+    }
+?>
 
 <?php
 include_once '../../Model/clients.php';
@@ -16,26 +33,32 @@ if (
     isset($_POST["username"]) &&
     isset($_POST["password"]) &&
     isset($_POST["email"]) &&
-    isset($_POST["phone"]) &&
-    isset($_POST["sexe"]) 
+    isset($_POST["phone"]) 
 
 ) {
     if (
         !empty($_POST["username"]) &&
         !empty($_POST["password"]) &&
         !empty($_POST["email"]) &&
-        !empty($_POST["phone"]) &&
-        !empty($_POST["sexe"]) 
+        !empty($_POST["phone"]) 
     ) {
         $Client = new Client(
 
             $_POST["username"],
             $_POST['password'],
             $_POST['email'],
-            $_POST['phone'],
-            $_POST['sexe']
+            $_POST['phone']
         );
-        $clientC->ajouterClient($Client);
+        if( $clientC->verifierClient($_POST["username"]) == 0 )
+        {
+            $clientC->ajouterClient($Client);
+        }
+        else
+        {
+            echo "<script> alert('Username Already Exist') </script>";
+        }
+
+        
     } else
         echo "Missing information";
 }
@@ -63,6 +86,7 @@ if (
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+    <script src="js/controleSaisieClient.js"></script>
 </head>
 
 <body id="page-top">
@@ -79,10 +103,14 @@ if (
             <!-- Main Content -->
             <div id="content">
 
+                <!-- Topbar -->
+                    <?php $usr=$admin; include "topbar.php"; ?>
+                <!-- End of Topbar -->
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <form method="post" action="">
+                    <form method="post" action="" id="form">
 
                         <div class="form-group">
                             <label for="nom">Entrer le nom d'utilisateur</label>
@@ -95,6 +123,11 @@ if (
                         </div>
 
                         <div class="form-group">
+                            <label for="prenom">Retapez le mot de passe</label>
+                            <input type="text" class="form-control" name="confirmation" id="confirmation" placeholder="Mot de passe" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="age">Entrer l'email</label>
                             <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
                         </div>
@@ -104,18 +137,12 @@ if (
                             <input type="tel" name="phone" id="phone" placeholder="12-345-678" required>
                         </div>
 
-                        <div class="form-group">
-                            Sexe:
-                            <label for="homme">Homme</label>                           
-                            <input type="radio" name="sexe" id="sexe" value="homme" checked>
-                            <label for="femme">Femme</label>
-                            <input type="radio" name="sexe" id="sexe" value="femme">
-                        </div>
-
-                        <button type="submit" value="Envoyer" class="btn btn-primary">Ajouter</button>
+                        <button type="submit" value="Envoyer" class="btn btn-primary"  onclick="verif();">Ajouter</button>
 
                     </form>
-                
+                    <br>
+                    <div id="erreur"></div>
+
 
                 </div>
                 <!-- /.container-fluid -->

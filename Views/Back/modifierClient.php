@@ -1,3 +1,23 @@
+<?php
+	session_start(); 
+?>
+
+<?php
+	if( $_SESSION["etat"] != 1)
+	{
+		echo "<script type='text/javascript'>";
+            echo "alert('Please login first!');
+            window.location.href='login.php';";
+		echo "</script>";
+		
+	}
+    else
+    {
+        $admin =  $_SESSION["username"];
+    }
+?>
+
+
 <?php //require_once 'topbar.php'?>
 
 <?php
@@ -17,24 +37,21 @@ if (
     isset($_POST["username"]) &&
     isset($_POST["password"]) &&
     isset($_POST["email"]) &&
-    isset($_POST["phone"]) &&
-    isset($_POST["sexe"]) 
+    isset($_POST["phone"]) 
 
 ) {
     if (
         !empty($_POST["username"]) &&
         !empty($_POST["password"]) &&
         !empty($_POST["email"]) &&
-        !empty($_POST["phone"]) &&
-        !empty($_POST["sexe"]) 
+        !empty($_POST["phone"]) 
     ) {
         $Client = new Client(
 
             $_POST["username"],
             $_POST['password'],
             $_POST['email'],
-            $_POST['phone'],
-            $_POST['sexe']
+            $_POST['phone']
         );
         $clientC->modifierClient($Client, $_GET['id']);
         header('refresh:2;url=afficherClients.php');
@@ -64,6 +81,7 @@ if (
 <!-- Custom styles for this template-->
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <script src="//cdn.ckeditor.com/4.15.1/full/ckeditor.js"></script>
+    <script src="js/controleSaisieClient.js"></script>
 </head>
 
 <body id="page-top">
@@ -80,6 +98,10 @@ if (
             <!-- Main Content -->
             <div id="content">
 
+                <!-- Topbar -->
+                    <?php $usr=$admin; include "topbar.php"; ?>
+                <!-- End of Topbar -->
+
                 <!-- Begin Page Content -->
 
                 <div id="error">
@@ -95,7 +117,7 @@ if (
 
                 <div class="container-fluid">
 
-                    <form method="post" action="">
+                    <form method="post" action="" id="form">
 
                         <div class="form-group">
                             <label for="nom">Entrer le nom d'utilisateur de l'client</label>
@@ -108,6 +130,11 @@ if (
                         </div>
 
                         <div class="form-group">
+                            <label for="prenom">Retapez le mot de passe</label>
+                            <input type="text" class="form-control" name="confirmation" id="confirmation"  value="<?PHP echo $client['password']; ?>" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="age">Entrer l'email de l'client</label>
                             <input type="text" class="form-control" name="email" id="email" value="<?PHP echo $client['email']; ?>" required>
                         </div>
@@ -117,18 +144,11 @@ if (
                             <input type="tel" name="phone" id="phone" value="<?PHP echo $client['phone']; ?>" required>
                         </div>
 
-
-                        <div class="form-group">
-                            Sexe:
-                            <label for="homme">Homme</label>                           
-                            <input type="radio" name="sexe" id="sexe" value="homme" <?PHP if($client["sexe"] == "homme") {echo "checked";}; ?> >
-                            <label for="femme">Femme</label>
-                            <input type="radio" name="sexe" id="sexe" value="femme" <?PHP if($client["sexe"] == "femme") {echo "checked";}; ?>>
-                        </div>
-
                         <button type="submit" value="Envoyer" class="btn btn-primary">Modifier</button>
 
                     </form>
+                    <br>
+                    <div id="erreur"></div>
 
                 </div>
                 <!-- /.container-fluid -->

@@ -5,7 +5,7 @@
     $dBPassword="";
     $dBName="cuisinet";
 
-    $conn = mysqli_connect ($servername,$dBUsername,$dBPassword,$dBName);
+    $conn= mysqli_connect ($servername,$dBUsername,$dBPassword,$dBName);
 
 
     if(!$conn){
