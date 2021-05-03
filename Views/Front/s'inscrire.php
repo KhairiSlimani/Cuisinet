@@ -1,50 +1,50 @@
 <?php //require_once 'topbar.php'?>
 
 <?php
-include_once '../../Model/clients.php';
-include_once '../../Controller/clientC.php';
+	include_once '../../Model/clients.php';
+	include_once '../../Controller/clientC.php';
 
-$error = "";
+	$error = "";
 
-// create employe
-$client = null;
+	$client = null;
 
-// create an instance of the controller
-$clientC = new clientC();
-if (
+	// create an instance of the controller
+	$clientC = new clientC();
+	if (
 
-    isset($_POST["username"]) &&
-    isset($_POST["password"]) &&
-    isset($_POST["email"]) &&
-    isset($_POST["phone"]) 
+		isset($_POST["username"]) &&
+		isset($_POST["password"]) &&
+		isset($_POST["email"]) &&
+		isset($_POST["phone"]) 
 
-) {
-    if (
-        !empty($_POST["username"]) &&
-        !empty($_POST["password"]) &&
-        !empty($_POST["email"]) &&
-        !empty($_POST["phone"]) 
-    ) {
-        $Client = new Client(
+	) {
+		if (
+			!empty($_POST["username"]) &&
+			!empty($_POST["password"]) &&
+			!empty($_POST["email"]) &&
+			!empty($_POST["phone"]) 
+		) {
+			$Client = new Client(
 
-            $_POST["username"],
-            $_POST['password'],
-            $_POST['email'],
-            $_POST['phone']
-        );
-        if( $clientC->verifierClient($_POST["username"]) == 0 )
-        {
-            $clientC->ajouterClient($Client);
-        }
-        else
-        {
-            echo "<script> alert('Username Already Exist') </script>";
-        }
+				$_POST["username"],
+				$_POST['password'],
+				$_POST['email'],
+				$_POST['phone'],
+				0
+			);
+			if( $clientC->verifierClient($_POST["username"]) == 0 )
+			{
+				$clientC->ajouterClient($Client);
+			}
+			else
+			{
+				echo "<script> alert('Username Already Exist') </script>";
+			}
 
-        
-    } else
-        echo "Missing information";
-}
+			
+		} else
+			echo "Missing information";
+	}
 
 ?>
 

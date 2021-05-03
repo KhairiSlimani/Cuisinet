@@ -39,6 +39,7 @@
                 <?php if(!empty($_SESSION["etat"]) ) { ?>
 				<li class="nav-item <?php if($page == "Profil"){echo 'active';}?>"><a href="profil.php?username=<?PHP echo $_SESSION["username"]; ?>" class="nav-link">Profil</a></li>
 				<li class="nav-item <?php if($page == "Contact"){echo 'active';}?>"><a href="contact.php?username=<?PHP echo $_SESSION["username"]; ?>" class="nav-link">Contact Us</a></li>
+				
                 <?php 
 				}
 				else

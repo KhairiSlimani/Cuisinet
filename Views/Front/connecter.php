@@ -31,7 +31,7 @@ if (
 			$_SESSION['id'] = $client['id'];
 			$_SESSION['etat'] = 1;
 			//echo '<a href="../index.php?link=' . $etat . '></a>';
-			header("Location: index.php?login=success");
+			header("Location: s'inscrire.php");
 			exit();
 
 		}
@@ -109,11 +109,19 @@ if (
 									<input type="submit" name="login_submit" value="Connecter" class="btn btn-white py-3 px-4">
 								</div>
 							</div>
+
+							<div class="col-md-12">
+								<div class="form-group">
+									<a href="forgotpassword.php"><input type="button" value="Mot de passe oublié" class="btn btn-white py-3 px-4"></a>
+								</div>
+							</div>
+
 							<div class="col-md-12">
 								<div class="form-group">
 									<a href="s'inscrire.php"><input type="button" value="Créer un compte" class="btn btn-white py-3 px-4"></a>
 								</div>
 							</div>
+
 
 						</div>
 					</form>

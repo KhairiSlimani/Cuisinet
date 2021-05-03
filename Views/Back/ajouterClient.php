@@ -47,7 +47,8 @@ if (
             $_POST["username"],
             $_POST['password'],
             $_POST['email'],
-            $_POST['phone']
+            $_POST['phone'],
+            $_SESSION['id']
         );
         if( $clientC->verifierClient($_POST["username"]) == 0 )
         {

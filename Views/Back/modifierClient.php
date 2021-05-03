@@ -51,7 +51,8 @@ if (
             $_POST["username"],
             $_POST['password'],
             $_POST['email'],
-            $_POST['phone']
+            $_POST['phone'],
+            $_SESSION['id']
         );
         $clientC->modifierClient($Client, $_GET['id']);
         header('refresh:2;url=afficherClients.php');

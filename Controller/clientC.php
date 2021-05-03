@@ -5,8 +5,8 @@
 
         public function ajouterClient($client)
         {
-            $sql = "INSERT INTO clients (username, password, email, phone) 
-            VALUES (:username, :password, :email, :phone)";
+            $sql = "INSERT INTO clients (username, password, email, phone, idAdmin) 
+            VALUES (:username, :password, :email, :phone, :idAdmin)";
     
             $db = config::getConnexion();
             try {
@@ -16,7 +16,8 @@
                     'username' => $client->getUsername(),
                     'password' => $client->getPassword(),
                     'email' => $client->getEmail(),
-                    'phone' => $client->getPhone()
+                    'phone' => $client->getPhone(),
+                    'idAdmin' => $client->getIdAdmin()
     
                 ]);
             } catch (Exception $e) {
@@ -91,7 +92,8 @@
                             username = :username,
                             password = :password,
                             email = :email,
-                            phone = :phone
+                            phone = :phone,
+                            idAdmin = :idAdmin
                         WHERE id = :id'
                 );
                 $query->execute([
@@ -99,7 +101,8 @@
                     'username' =>  $client->getUsername(),
                     'password' => $client->getPassword(),
                     'email' => $client->getEmail(),
-                    'phone' => $client->getPhone()
+                    'phone' => $client->getPhone(),
+                    'idAdmin' => $client->getIdAdmin()
                                  
                 ]);
                 echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -138,8 +141,21 @@
             }
         }
 
-
+        public function recupererClientEmail($email)
+        {
+            $sql = "SELECT * from clients where email='$email' ";
+            $db = config::getConnexion();
+            try {
+                $query = $db->prepare($sql);
+                $query->execute();
     
+                $user = $query->fetch();
+                return $user;
+            } catch (Exception $e) {
+                return false;
+            }
+        }
+
         public function recherche($search_value)
         {
             $sql="SELECT * FROM clients where username like '$search_value' ";

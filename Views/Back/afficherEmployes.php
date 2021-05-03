@@ -69,16 +69,14 @@
                         <?PHP
 
                             //pagination
-
                             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                             $perpage = isset($GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 3 ;
                             $employeC = new employeC();
                             $totalP = $employeC->calcTotalRows($perpage);
                             $listeEmployes = $employeC->pagination($page, $perpage);
-
+                            
 
                             //recherche
-
                             if(isset($_GET['recherche']))
                             {
                                 $search_value=$_GET["recherche"];
@@ -173,15 +171,12 @@
                                         <nav>
                                             <ul class="pagination">
                                                 <?php
-
                                                     for ($x = 1; $x <= $totalP; $x++) :
-
                                                 ?>
                                                 
                                                 <li class="page-item">
                                                     <a class="page-link" href="?page=<?php echo $x; ?>&per-page=<?php echo $perpage; ?>"><?php echo $x; ?></a><?php endfor; ?>
                                                 </li>
-
                                             </ul>
                                         </nav>
                                     </div>

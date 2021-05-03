@@ -7,8 +7,9 @@
         {
             $sql = "INSERT INTO employes (nom, prenom, age, sexe, titreEmploi, salaire, numeroTelephone, photo) 
             VALUES (:nom, :prenom, :age, :sexe, :titreEmploi, :salaire, :numeroTelephone, :photo)";
-    
+
             $db = config::getConnexion();
+
             try {
                 $query = $db->prepare($sql);
     
@@ -170,11 +171,6 @@
                 die('Erreur: ' . $e->getMessage());
             }
         }
-
-    
-
-    
-
 
         
     }

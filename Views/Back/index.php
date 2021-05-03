@@ -1,8 +1,6 @@
 <?php
 	session_start(); 
-?>
 
-<?php
 	if( $_SESSION["etat"] != 1)
 	{
 		echo "<script type='text/javascript'>";
@@ -11,10 +9,7 @@
 		echo "</script>";
 		
 	}
-    else
-    {
-        $admin =  $_SESSION["username"];
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +48,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                    <?php $usr=$admin; include "topbar.php"; ?>
+                    <?php $usr=$_SESSION["username"]; include "topbar.php"; ?>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -194,37 +189,34 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Statistics on employees</h6>
                                     <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-4 pb-2">
                                         <canvas id="myPieChart"></canvas>
+                                        
                                     </div>
                                     <div class="mt-4 text-center small">
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
+                                            <i class="fas fa-circle text-info"></i> Chef
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
+                                            <i class="fas fa-circle text-success"></i> Aide-cuisinier
                                         </span>
                                         <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
+                                            <i class="fas fa-circle text-warning"></i> Serveur
                                         </span>
+                                        <span class="mr-2">
+                                            <i class="fas fa-circle text-danger"></i> Livreur
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>
@@ -262,7 +254,7 @@
                                             aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <h4 class="small font-weight-bold">Payout Details <span
-                                            class="float-right">80%</span></h4>
+                                            class="float-right">10%</span></h4>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
                                             aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -449,7 +441,78 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+
+    <script>
+        Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        Chart.defaults.global.defaultFontColor = '#858796';
+        
+
+        <?php 
+            require_once "../../Controller/employeC.php"; 
+
+            $Chef = 0;
+            $Aidecuisinier = 0;
+            $Serveur = 0;
+            $Livreur = 0;
+            
+            $employeC = new employeC();
+            $listeEmployes = $employeC->afficherEmploye();
+
+            foreach ($listeEmployes as $row) 
+            {
+                if($row['titreEmploi'] == "chef")
+                {
+                    $Chef = $Chef + 1;
+                }
+                else if($row['titreEmploi'] == "aide-cuisinier")
+                {
+                    $Aidecuisinier = $Aidecuisinier + 1;
+                }
+                else if($row['titreEmploi'] == "serveur")
+                {
+                    $Serveur = $Serveur + 1;
+                }
+                else if($row['titreEmploi'] == "livreur")
+                {
+                    $Livreur = $Livreur + 1;
+                }
+
+            }
+
+        ?>
+
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Chef", "Aide-cuisinier", "Serveur" , "Livreur"],
+            datasets: [{
+            data: [<?php echo $Chef; ?>, <?php echo $Aidecuisinier; ?> , <?php echo $Serveur; ?> , <?php echo $Livreur; ?>],
+            backgroundColor: ['#36b9cc', '#1cc88a', '#f6c23e' , '#e74a3b'],
+            hoverBackgroundColor: ['#800080', '#800080', '#800080' , '#800080'],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            },
+            legend: {
+            display: false
+            },
+            cutoutPercentage: 80,
+        },
+        });
+
+    </script>
 
 </body>
 
