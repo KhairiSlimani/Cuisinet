@@ -1,9 +1,16 @@
-<?php session_start(); ?>
+<?php 
+session_start();
+	include "../../Controller/platC.php";
+
+	$platC = new platC();
+	$listePlats = $platC->afficherPlat();
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cuisinet - Menu</title>
+	<title>Taste.it - Free Bootstrap 4 Template by Colorlib</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
@@ -40,266 +47,301 @@
 				</div>
 			</div>
 			<div class="row">
+
+			
+<?php if ($platC->checkPlatWithCategorie("PETIT-DEJEUNER")): 
+	?>
+	
+
 				<div class="col-md-6 col-lg-4">
 					<div class="menu-wrap">
 						<div class="heading-menu text-center ftco-animate">
 							<h3>PETIT-DÉJEUNER</h3>
 						</div>
+<?PHP
+					foreach ($listePlats as $row) {
+						if ($row['type'] == "PETIT-DEJEUNER" ) {
+				?>
 						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/breakfast-1.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/breakfast-2.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/breakfast-3.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<span class="flat flaticon-bread" style="left: 0;"></span>
-						<span class="flat flaticon-breakfast" style="right: 0;"></span>
-					</div>
-				</div>
 
-				<div class="col-md-6 col-lg-4">
-					<div class="menu-wrap">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>Déjeuner</h3>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/lunch-1.jpg);"></div>
+							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
 							<div class="text">
 								<div class="d-flex">
 									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
+										<h3><?PHP echo $row['nom']; ?></h3>
 									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/lunch-2.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/lunch-3.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<span class="flat flaticon-pizza" style="left: 0;"></span>
-						<span class="flat flaticon-chicken" style="right: 0;"></span>
-					</div>
-				</div>
 
-				<div class="col-md-6 col-lg-4">
-					<div class="menu-wrap">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>Dîner</h3>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dinner-1.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
+									<?php if ($row['pourcentage'] == null): ?>
+									<div class="one-forth"  >
+										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
 									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
+									<?php endif ?>
+									<?php if ($row['pourcentage'] != null): ?>
+									<div class="one-forth" >
+										<span class="price" style="text-decoration: line-through;">
+										
+										 $ <?PHP echo $row['prix']; ?> 
+										
+									</span>
+									<br>
+									<span class="price">
+											$ <?PHP echo
+										 ($row['prix'] - ($row['prix']*$row['pourcentage'])/100); ?> 
+										
+										  </span>
+								
 									</div>
+									<?php endif ?>
+								
 								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
+								<p><span><?PHP echo $row['description']; ?></span></p>
 							</div>
 						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dinner-2.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dinner-3.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<span class="flat flaticon-omelette" style="left: 0;"></span>
-						<span class="flat flaticon-burger" style="right: 0;"></span>
-					</div>
-				</div>
 
-				<!--  -->
-				<div class="col-md-6 col-lg-4">
-					<div class="menu-wrap">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>Desserts</h3>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dessert-1.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dessert-2.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/dessert-3.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Sauce au bœuf rôti</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Viande</span>, <span>Pommes de terre</span>, <span>Riz</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<span class="flat flaticon-cupcake" style="left: 0;"></span>
-						<span class="flat flaticon-ice-cream" style="right: 0;"></span>
-					</div>
-				</div>
-
-				<div class="col-md-6 col-lg-4">
-					<div class="menu-wrap">
-						<div class="heading-menu text-center ftco-animate">
-							<h3>BOISSONS &amp; THÉ</h3>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/drink-1.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/drink-2.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
-						<div class="menus border-bottom-0 d-flex ftco-animate">
-							<div class="menu-img img" style="background-image: url(images/drink-3.jpg);"></div>
-							<div class="text">
-								<div class="d-flex">
-									<div class="one-half">
-										<h3>Beef Roast Source</h3>
-									</div>
-									<div class="one-forth">
-										<span class="price">$29</span>
-									</div>
-								</div>
-								<p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
-							</div>
-						</div>
+<?PHP
+				}	}
+?>
+						
 						<span class="flat flaticon-wine" style="left: 0;"></span>
 						<span class="flat flaticon-wine-1" style="right: 0;"></span>
 					</div>
 				</div>
+
+<?php endif ;
+ if ($platC->checkPlatWithCategorie("DEJEUNER")):
+?>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="menu-wrap">
+						<div class="heading-menu text-center ftco-animate">
+							<h3>DÉJEUNER</h3>
+						</div>
+<?PHP
+					foreach ($listePlats as $row) {
+						if ($row['type']== "DEJEUNER" ) {
+				?>
+						<div class="menus d-flex ftco-animate">
+
+							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
+							<div class="text">
+								<div class="d-flex">
+									<div class="one-half">
+										<h3><?PHP echo $row['nom']; ?></h3>
+									</div>
+
+									<?php if ($row['pourcentage'] == null): ?>
+									<div class="one-forth"  >
+										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
+									</div>
+									<?php endif ?>
+
+									<?php if ($row['pourcentage'] != null): ?>
+									<div class="one-forth" >
+										<span class="price" style="text-decoration: line-through;">
+										
+										 $ <?PHP echo $row['prix']; ?> 
+										
+									</span>
+									<br>
+									<span class="price">
+											$ <?PHP echo
+										 ($row['prix'] - ($row['prix']*$row['pourcentage'])/100); ?> 
+										
+										  </span>
+								
+									</div>
+									<?php endif ?>
+								
+								</div>
+								<p><span><?PHP echo $row['description']; ?></span></p>
+							</div>
+						</div>
+
+<?PHP
+				}	}
+?>
+						
+						<span class="flat flaticon-wine" style="left: 0;"></span>
+						<span class="flat flaticon-wine-1" style="right: 0;"></span>
+					</div>
+				</div>
+
+<?php endif ;
+ if ($platC->checkPlatWithCategorie("DINER")):
+?>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="menu-wrap">
+						<div class="heading-menu text-center ftco-animate">
+							<h3>DINER</h3>
+						</div>
+<?PHP
+					foreach ($listePlats as $row) {
+						if ($row['type'] == "DINER" ) {
+				?>
+						<div class="menus d-flex ftco-animate">
+
+							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
+							<div class="text">
+								<div class="d-flex">
+									<div class="one-half">
+										<h3><?PHP echo $row['nom']; ?></h3>
+									</div>
+
+									<?php if ($row['pourcentage'] == null): ?>
+									<div class="one-forth"  >
+										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
+									</div>
+									<?php endif ?>
+
+									<?php if ($row['pourcentage'] != null): ?>
+									<div class="one-forth" >
+										<span class="price" style="text-decoration: line-through;">
+										
+										 $ <?PHP echo $row['prix']; ?> 
+										
+									</span>
+									<br>
+									<span class="price">
+											$ <?PHP echo
+										 ($row['prix'] - ($row['prix']*$row['pourcentage'])/100); ?> 
+										
+										  </span>
+								
+									</div>
+									<?php endif ?>
+								
+								</div>
+								<p><span><?PHP echo $row['description']; ?></span></p>
+							</div>
+						</div>
+
+<?PHP
+				}	}
+?>
+						
+						<span class="flat flaticon-wine" style="left: 0;"></span>
+						<span class="flat flaticon-wine-1" style="right: 0;"></span>
+					</div>
+				</div>
+<?php endif ;
+ if ($platC->checkPlatWithCategorie("DESSERTS")):
+?>
+
+				<div class="col-md-6 col-lg-4">
+					<div class="menu-wrap">
+						<div class="heading-menu text-center ftco-animate">
+							<h3>DESSERT</h3>
+						</div>
+<?PHP
+					foreach ($listePlats as $row) {
+						if ($row['type'] == "DESSERTS" ) {
+				?>
+						<div class="menus d-flex ftco-animate">
+
+							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
+							<div class="text">
+								<div class="d-flex">
+									<div class="one-half">
+										<h3><?PHP echo $row['nom']; ?></h3>
+									</div>
+
+									<?php if ($row['pourcentage'] == null): ?>
+									<div class="one-forth"  >
+										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
+									</div>
+									<?php endif ?>
+
+									<?php if ($row['pourcentage'] != null): ?>
+									<div class="one-forth" >
+										<span class="price" style="text-decoration: line-through;">
+										
+										 $ <?PHP echo $row['prix']; ?> 
+										
+									</span>
+									<br>
+									<span class="price">
+											$ <?PHP echo
+										 ($row['prix'] - ($row['prix']*$row['pourcentage'])/100); ?> 
+										
+										  </span>
+								
+									</div>
+									<?php endif ?>
+								
+								</div>
+								<p><span><?PHP echo $row['description']; ?></span></p>
+							</div>
+						</div>
+
+<?PHP
+				}	}
+?>
+						
+						<span class="flat flaticon-wine" style="left: 0;"></span>
+						<span class="flat flaticon-wine-1" style="right: 0;"></span>
+					</div>
+				</div>
+
+<?php endif ;
+ if ($platC->checkPlatWithCategorie("BOISSONS et THE")):
+?>
+				<div class="col-md-6 col-lg-4">
+					<div class="menu-wrap">
+						<div class="heading-menu text-center ftco-animate">
+							<h3>BOISSONS ET THE</h3>
+						</div>
+<?PHP
+					foreach ($listePlats as $row) {
+						if ($row['type'] == "BOISSONS et THE" ) {
+				?>
+						<div class="menus d-flex ftco-animate">
+
+							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
+							<div class="text">
+								<div class="d-flex">
+									<div class="one-half">
+										<h3><?PHP echo $row['nom']; ?></h3>
+									</div>
+
+									<?php if ($row['pourcentage'] == null): ?>
+									<div class="one-forth"  >
+										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
+									</div>
+									<?php endif ?>
+
+									<?php if ($row['pourcentage'] != null): ?>
+									<div class="one-forth" >
+										<span class="price" style="text-decoration: line-through;">
+										
+										 $ <?PHP echo $row['prix']; ?> 
+										
+									</span>
+									<br>
+									<span class="price">
+											$ <?PHP echo
+										 ($row['prix'] - ($row['prix']*$row['pourcentage'])/100); ?> 
+										
+										  </span>
+								
+									</div>
+									<?php endif ?>
+								
+								</div>
+								<p><span><?PHP echo $row['description']; ?></span></p>
+							</div>
+						</div>
+
+<?PHP
+				}	}
+?>
+						
+						<span class="flat flaticon-wine" style="left: 0;"></span>
+						<span class="flat flaticon-wine-1" style="right: 0;"></span>
+					</div>
+				</div>
+
+				<?php endif; ?>
 			</div>
 		</div>
 
@@ -323,8 +365,8 @@
 		<script src="js/bootstrap-datepicker.js"></script>
 		<script src="js/jquery.timepicker.min.js"></script>
 		<script src="js/scrollax.min.js"></script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="js/google-map.js"></script>
+		<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> -->
+		<!--<script src="js/google-map.js"></script> -->
 		<script src="js/main.js"></script>
 		
 	</body>

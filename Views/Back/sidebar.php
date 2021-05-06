@@ -62,6 +62,30 @@
 
             </div>
         </div>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePlats" aria-expanded="true" aria-controls="collapsePlats">
+            <i class=""></i>
+            <span>Plats</span>
+        </a>
+        <div id="collapsePlats" class="collapse" aria-labelledby="headingPlats" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gérer les Plats:</h6>
+                <a class="collapse-item" href="ajouterPlat.php">Ajouter un Plat</a>
+                <a class="collapse-item" href="afficherPlats.php">Afficher Les Plats</a>
+
+            </div>
+        </div>
+   <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePromos" aria-expanded="true" aria-controls="collapsePromos">
+            <i class=""></i>
+            <span>Promos</span>
+        </a>
+        <div id="collapsePromos" class="collapse" aria-labelledby="headingPromos" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gérer les Promotions:</h6>
+                <a class="collapse-item" href="ajouterPromo.php">Ajouter une promotions</a>
+                <a class="collapse-item" href="afficherPromos.php">Afficher Les promotions</a>
+
+            </div>
+        </div>
 
     </li>
 
