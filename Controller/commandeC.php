@@ -1,20 +1,23 @@
 <?php
     include "C://xampp/htdocs/Cuisinet/config.php";
 
-    class adminC {
+    class commandeC {
 
-        public function ajouterAdmin($admin)
+        public function ajouterCommande($commande)
         {
-            $sql = "INSERT INTO admin (username, password) 
-            VALUES (:username, :password)";
+            $sql = "INSERT INTO commande (nomclient, adresse, numerotel, idPlat) 
+            VALUES (:nomclient, :adresse, :numerotel, :idPlat)";
     
             $db = config::getConnexion();
             try {
                 $query = $db->prepare($sql);
     
                 $query->execute([
-                    'username' => $admin->getUsername(),
-                    'password' => $admin->getPassword()
+                    'nomclient' => $commande->getNomclient(),
+                    'adresse' => $commande->getAdresse(),
+                    'numerotel' => $commande->getNumerotel(),
+                    'idPlat' => $commande->getidPlat(),
+
     
                 ]);
             } catch (Exception $e) {
@@ -22,40 +25,10 @@
             }
         }
 
-        public function verifierAdmin($username)
-        {
-            $sql = "SELECT * from admin where username='$username' ";
-            $db = config::getConnexion();
-            try {
-                $query = $db->prepare($sql);
-                $query->execute();
-                $result = $query->rowCount();
-                return $result;
-            } catch (Exception $e) {
-                die('Erreur: ' . $e->getMessage());
-            }
-        }
-
-        public function connecterAdmin($username , $password)
-        {
-            $sql = "SELECT * from admin where username='$username' and password='$password' ";
-            $db = config::getConnexion();
-            try {
-                $query = $db->prepare($sql);
-                $query->execute();
-    
-                $user = $query->fetch();
-                return $user;
-            } catch (Exception $e) {
-                return false;
-            }
-        }
-
-
-        public function afficherAdmin()
+        public function afficherCommande()
         {
     
-            $sql = "SELECT * FROM admin";
+            $sql = "SELECT * FROM commande";
             $db = config::getConnexion();
             try {
                 $liste = $db->query($sql);
@@ -65,12 +38,13 @@
             }
         }
 
-        public function supprimerAdmin($id)
+
+        public function supprimerCommande($idcommande)
         {
-            $sql = "DELETE FROM admin WHERE id = :id";
+            $sql = "DELETE FROM commande WHERE idcommande = :idcommande";
             $db = config::getConnexion();
             $req = $db->prepare($sql);
-            $req->bindValue(':id', $id);
+            $req->bindValue(':idcommande', $idcommande);
             try {
                 $req->execute();
             } catch (Exception $e) {
@@ -78,21 +52,27 @@
             }
         }
 
-        public function modifierAdmin($admin, $id)
+        public function modifierCommande($commande, $idcommande)
         {
             $db = config::getConnexion();
             try {
                 
                 $query = $db->prepare(
-                    'UPDATE admin SET 
-                            username = :username,
-                            password = :password
-                        WHERE id = :id'
+                    'UPDATE commande SET 
+                            nomclient = :nomclient, 
+                            adresse= :adresse,
+                            numerotel = :numerotel,
+                            idPlat = :idPlat
+
+                        WHERE idcommande = :idcommande'
                 );
                 $query->execute([
-                    'id' =>  $id,
-                    'username' =>  $admin->getUsername(),
-                    'password' => $admin->getPassword()
+                    'idcommande' =>  $idcommande,
+                    'nomclient' => $commande->getNomclient(),
+                    'adresse' => $commande->getAdresse(),
+                    'numerotel' => $commande->getNumerotel(),
+                    'idPlat' => $commande->getIdPlat()
+
                                  
                 ]);
                 echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -101,9 +81,9 @@
             }
         }
 
-        public function recupererAdmin($id)
+        public function recupererCommande($idcommande)
         {
-            $sql = "SELECT * from admin where id=$id";
+            $sql = "SELECT * from commande where idcommande=$idcommande";
             $db = config::getConnexion();
             try {
                 $query = $db->prepare($sql);
@@ -116,40 +96,12 @@
             }
         }
 
-        public function recupererAdminUS($username)
-        {
-            $sql = "SELECT * from admin where username='$username' ";
-            $db = config::getConnexion();
-            try {
-                $query = $db->prepare($sql);
-                $query->execute();
     
-                $user = $query->fetch();
-                return $user;
-            } catch (Exception $e) {
-                die('Erreur: ' . $e->getMessage());
-            }
-        }
-
-        public function recupererIdClientAdmin($id)
-        {
-            $sql = "SELECT idClient from admin where username='$username' ";
-            $db = config::getConnexion();
-            try {
-                $query = $db->prepare($sql);
-                $query->execute();
-    
-                $user = $query->fetch();
-                return $user;
-            } catch (Exception $e) {
-                die('Erreur: ' . $e->getMessage());
-            }
-        }
-
         public function recherche($search_value)
         {
-            $sql="SELECT * FROM admin where username like '$search_value' ";
+            $sql="SELECT * FROM commande where idcommande like '$search_value' or nomclient like '%$search_value%' ";
     
+            //global $db;
             $db =Config::getConnexion();
     
             try{
@@ -166,7 +118,7 @@
         public function pagination($page, $perPage)
         {
             $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
-            $sql = "SELECT * FROM admin LIMIT {$start},{$perPage}";
+            $sql = "SELECT * FROM commande LIMIT {$start},{$perPage} ";
             $db = config::getConnexion();
             try {
                 $liste = $db->prepare($sql);
@@ -181,7 +133,7 @@
         public function trieCroissant($page, $perPage)
         {
             $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
-            $sql = "SELECT * FROM admin order by username LIMIT {$start},{$perPage}";
+            $sql = "SELECT * FROM commande order by idcommande LIMIT {$start},{$perPage} ";
             $db = config::getConnexion();
             try {
                 $liste = $db->prepare($sql);
@@ -197,7 +149,7 @@
     
         public function calcTotalRows($perPage)
         {
-            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM admin";
+            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM commande";
             $db = config::getConnexion();
             try {
     
@@ -210,5 +162,42 @@
             }
         }
 
+
+       
+        public function getPlatById($idplat)
+        {
+ 
+             $sql = "SELECT  * FROM plats where idPlat=$idplat";
+             $db = config::getConnexion();
+             try{
+                $query = $db->prepare($sql);
+                $query->execute();
     
+                $plat = $query->fetch();
+                return $plat;
+             }
+             catch (Exception $e){
+                 die('Erreur: '.$e->getMessage());
+             }
+             
+ 
+ 
+         }
+    
+         public function getPlats()
+         {
+             $sql = "SELECT * FROM Plats ";
+             $db = config::getConnexion();
+             try {
+                 $liste = $db->query($sql);
+                 return $liste;
+             } catch (Exception $e) {
+                 die('Erreur: ' . $e->getMessage());
+             }
+         }
+
+    
+
+
+        
     }

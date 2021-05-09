@@ -135,11 +135,13 @@
                 $query->execute();
     
                 $user = $query->fetch();
+                echo $user;
                 return $user;
             } catch (Exception $e) {
                 die('Erreur: ' . $e->getMessage());
             }
         }
+
 
         public function recupererClientEmail($email)
         {
@@ -155,7 +157,7 @@
                 return false;
             }
         }
-
+        
         public function recherche($search_value)
         {
             $sql="SELECT * FROM clients where username like '$search_value' ";
@@ -202,6 +204,7 @@
                 die('Erreur: ' . $e->getMessage());
             }
         }
+
 
     
     

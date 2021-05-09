@@ -15,8 +15,7 @@
                 $query->execute([
                     'nom' => $plat->getNom(),
                     'description' => $plat->getDescription(),
-     'prix' => $plat->getprix(),
-                   
+                    'prix' => $plat->getprix(),
                     'type' => $plat->getType(),
                     'photo' => $plat->getPhoto()
     

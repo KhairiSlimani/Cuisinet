@@ -86,6 +86,30 @@
 
             </div>
         </div>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCommande" aria-expanded="true" aria-controls="collapseCommande">
+            <i class=""></i>
+            <span>Commande</span>
+        </a>
+        <div id="collapseCommande" class="collapse" aria-labelledby="headingCommande" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gérer Les commandes</h6>
+                <a class="collapse-item" href="ajouterCommande.php">Ajouter une commande</a>
+                <a class="collapse-item" href="afficherCommande.php">Afficher les commandes</a>
+            </div>
+        </div>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReservations" aria-expanded="true" aria-controls="collapseReservations">
+            <i class=""></i>
+            <span>Reservation</span>
+        </a>
+        <div id="collapseReservations" class="collapse" aria-labelledby="headingReservation" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Gérer les reservation:</h6>
+                <a class="collapse-item" href="ajouterReservation.php">Ajouter une reservation</a>
+                <a class="collapse-item" href="afficherReservation.php">Afficher Les reservations</a>
+
+            </div>
+        </div>
+      
 
     </li>
 

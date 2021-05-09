@@ -65,12 +65,12 @@ session_start();
 						<div class="menus d-flex ftco-animate">
 
 							<div class="menu-img img" style="background-image: url(images/<?PHP echo $row['photo']; ?>);"></div>
-							<div class="text">
+							 <div class="text">
 								<div class="d-flex">
 									<div class="one-half">
 										<h3><?PHP echo $row['nom']; ?></h3>
 									</div>
-
+									
 									<?php if ($row['pourcentage'] == null): ?>
 									<div class="one-forth"  >
 										<span class="price"> $ <?PHP echo $row['prix']; ?> </span>
@@ -91,11 +91,14 @@ session_start();
 										  </span>
 								
 									</div>
+
+									
 									<?php endif ?>
 								
 								</div>
 								<p><span><?PHP echo $row['description']; ?></span></p>
-							</div>
+							</div> 
+							<a  href="commanderPlats.php?idPlat=<?PHP echo $row['idPlat']; ?>"><input id="bt" type="button" value="Commander" class="btn btn-white "></a>
 						</div>
 
 <?PHP
@@ -155,6 +158,7 @@ session_start();
 								</div>
 								<p><span><?PHP echo $row['description']; ?></span></p>
 							</div>
+							<a  href="commanderPlats.php?idPlat=<?PHP echo $row['idPlat']; ?>"><input id="bt" type="button" value="Commander" class="btn btn-white "></a>
 						</div>
 
 <?PHP
@@ -213,7 +217,8 @@ session_start();
 								
 								</div>
 								<p><span><?PHP echo $row['description']; ?></span></p>
-							</div>
+							</div> 
+							<a  href="commanderPlats.php?idPlat=<?PHP echo $row['idPlat']; ?>"><input id="bt" type="button" value="Commander" class="btn btn-white "></a>
 						</div>
 
 <?PHP
@@ -272,6 +277,7 @@ session_start();
 								</div>
 								<p><span><?PHP echo $row['description']; ?></span></p>
 							</div>
+							<a  href="commanderPlats.php?idPlat=<?PHP echo $row['idPlat']; ?>"><input id="bt" type="button" value="Commander" class="btn btn-white "></a>
 						</div>
 
 <?PHP
@@ -330,6 +336,7 @@ session_start();
 								</div>
 								<p><span><?PHP echo $row['description']; ?></span></p>
 							</div>
+							<a  href="commanderPlats.php?idPlat=<?PHP echo $row['idPlat']; ?>"><input id="bt" type="button" value="Commander" class="btn btn-white "></a>
 						</div>
 
 <?PHP

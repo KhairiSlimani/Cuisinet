@@ -1,11 +1,11 @@
 <?php
     class Plat {
-        private int $idPlat;
-        private  string $nom;
-        private  string $description;
-        private  float $prix;
-        private  string $type;
-        private  string $photo;
+        private  $idPlat;
+        private  $nom;
+        private  $description;
+        private  $prix;
+        private  $type;
+        private  $photo;
 
         public function __construct($nom, $description, $prix, $type ,$photo){
             //$this->idPlat = $id;
