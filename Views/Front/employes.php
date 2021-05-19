@@ -3,8 +3,26 @@
 	
 	include "../../Controller/employeC.php";
 
+	//pagination
+	$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+	$perpage = isset($GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 4 ;
 	$employeC = new employeC();
-	$listeEmployes = $employeC->afficherEmploye();
+	$totalP = $employeC->calcTotalRows($perpage);
+	$listeEmployes = $employeC->pagination($page, $perpage);
+	
+
+	//recherche
+	if(isset($_GET['recherche']))
+	{
+		$search_value=$_GET["recherche"];
+		$listeEmployes=$employeC->recherche($search_value);
+	}
+
+	//trie
+	if(isset($_GET['trie']))
+	{
+		$listeEmployes = $employeC->trieCroissant($page, $perpage);
+	}
 
 ?>
 
@@ -48,6 +66,28 @@
 					<h2 class="mb-4">Notre Employés</h2>
 				</div>
 			</div>	
+
+			<form method="get" action="employes.php">
+                <button  type="submit" class="btn btn-primary" name="trie">Trie</button>
+            </form>
+			<br>
+			<table  style="border: none;">
+					<form method="get" action="employes.php">
+						<th>
+							<input type="text" name="recherche" placeholder="Rechercher...">
+						</th>
+						<th>
+							<button class="btn btn-primary" type="submit" value="Chercher">
+								Chercher
+							</button>
+						</th>
+
+					</form>
+
+			</table>
+
+			<br>
+
 			<div class="row">
 
 				<?PHP
@@ -79,6 +119,20 @@
 				?>
 
 			</div>
+
+			<div class="row no-gutters my-5">
+				<div class="col text-center">
+					<div class="block-27">
+						<ul>
+							<?php
+                                for ($x = 1; $x <= $totalP; $x++) :
+                            ?>
+							<li style="margin:3px;" ><a href="?page=<?php echo $x; ?>&per-page=<?php echo $perpage; ?>"><?php echo $x; ?></a><?php endfor; ?></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</section>
 

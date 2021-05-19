@@ -135,7 +135,7 @@
                 $query->execute();
     
                 $user = $query->fetch();
-                echo $user;
+
                 return $user;
             } catch (Exception $e) {
                 die('Erreur: ' . $e->getMessage());

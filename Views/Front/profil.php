@@ -44,17 +44,17 @@ include_once '../../Model/clients.php';
 		<div class="container">
 			<div class="row no-gutters">
 				<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
+					<?PHP
+
+						$clientC = new clientC();
+						$client = $clientC->recupererClient($_SESSION['id']);
+
+					?>
 
 
 					<form id="ff" action="includes/logoutinc.php" class="appointment-form" method="">
-						<h3 class="mb-3">PROFIL</h3>
+						<h3 class="mb-3">PROFIL <?php $i = $client['idAdmin']; if ($i != 0) {echo "(Créer par l'admin de l'ID: $i)";} ?></h3>
 						<div class="row">
-                        <?PHP
-
-							$clientC = new clientC();
-							$client = $clientC->recupererClient($_SESSION['id']);
-							
-				        ?>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="name" name="username" class="form-control" value="<?PHP echo $client['username']; ?>" disabled>
