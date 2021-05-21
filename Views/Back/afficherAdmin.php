@@ -167,6 +167,11 @@
                                             </ul>
                                         </nav>
                                     </div>
+
+                                    <form action="printAdmins">
+                                        <button class="btn btn-danger" type="submit">Print</button> 
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

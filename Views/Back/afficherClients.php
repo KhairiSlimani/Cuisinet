@@ -88,8 +88,8 @@
                             
                         ?> 
 
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
+                        <div class="card shadow mb-4" >
+                            <div class="card-header py-3" >
                                 <h6 class="m-0 font-weight-bold text-primary">Tableau des Clients</h6>
                             </div>
                             <div class="card-body">
@@ -172,6 +172,11 @@
                                             </ul>
                                         </nav>
                                     </div>
+
+                                    <form action="printClients">
+                                        <button class="btn btn-danger" type="submit">Print</button> 
+                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>

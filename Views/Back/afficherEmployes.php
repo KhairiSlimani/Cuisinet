@@ -89,7 +89,13 @@
 
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Tableau des Employés</h6>
+
+                                <tr>
+                                    <th>
+                                        <h6 class="m-0 font-weight-bold text-primary">Tableau des Employés</h6>
+                                    </th>
+                                </tr>
+                                
                             </div>
                             <div class="card-body">
 
@@ -176,6 +182,11 @@
                                             </ul>
                                         </nav>
                                     </div>
+
+                                    <form action="printEmployes">
+                                        <button class="btn btn-danger" type="submit">Print</button> 
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

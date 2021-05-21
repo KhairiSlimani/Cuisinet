@@ -122,7 +122,7 @@
         <textarea cols="30" rows="7" name="body" id="body" class="form-control" placeholder="Message"></textarea>
       </div>
       <div class="form-group">
-        <button type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">Ajouter</button>
+        <button type="submit" value="Envoyer" class="btn btn-primary py-3 px-5">Envoyer</button>
       </div>
     </form>
 
