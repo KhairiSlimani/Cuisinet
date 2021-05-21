@@ -1,6 +1,6 @@
 
 <?php
-    
+   
  
      class PromoC {
 
@@ -98,7 +98,7 @@
     
         public function recherche($search_value)
         {
-            $sql="SELECT * FROM plats where idPlat like '$search_value' or nom like '%$search_value%' ";
+            $sql="SELECT * FROM promotions where nomPromo like '$search_value' or id_plat like '%$search_value%' ";
     
             //global $db;
             $db =Config::getConnexion();
@@ -132,7 +132,7 @@
     
         public function calcTotalRows($perPage)
         {
-            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM Plats";
+            $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM promotions";
             $db = config::getConnexion();
             try {
     
@@ -146,7 +146,20 @@
         }
 
     
-
+    public function trieCroissant($page, $perPage)
+    {
+        $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
+        $sql = "SELECT * FROM promotions order by pourcentage LIMIT {$start},{$perPage} ";
+        $db = config::getConnexion();
+        try {
+            $liste = $db->prepare($sql);
+            $liste->execute();
+            $liste = $liste->fetchAll(PDO::FETCH_ASSOC);
+            return $liste;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
     
 
 

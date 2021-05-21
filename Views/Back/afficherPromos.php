@@ -1,6 +1,7 @@
-
 <?php 
-session_start(); 
+    
+
+	session_start(); 
 
 	if( $_SESSION["connecter"] != 1)
 	{
@@ -10,14 +11,15 @@ session_start();
 		echo "</script>";
 		
 	}
-    require_once "../../Controller/promoC.php"; 
+require_once "../../Controller/promoC.php";  
  include "C://xampp/htdocs/Cuisinet/config.php";
+
 ?>
 
 <!DOCTYPE html>
     <html lang="en">
 
-    <head>
+   <head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +27,7 @@ session_start();
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Afficher Les Promotions</title>
+        <title>Afficher des Promotions</title>
 
         <!-- Custom fonts for this template-->
         <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -50,44 +52,42 @@ session_start();
 
                 <!-- Main Content -->
                 <div id="content">
-  <!-- Topbar -->
+
+                    <!-- Topbar -->
                         <?php $usr=$_SESSION["username"]; include "topbar.php"; ?>
                     <!-- End of Topbar -->
 
-
                     <!-- Begin of container-fluid -->
                     <div class="container-fluid">
-                        <?php
+
+                        <?PHP
 
                             //pagination
 
                             $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-                            $perpage = isset($GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 3;
-
-                            //echo $page;
-                            //echo $perpage;
+                            $perpage = isset($GET['per-page']) && $_GET['per-page'] <= 50 ? (int)$_GET['per-page'] : 3 ;
                             $promoC = new promoC();
-                            $listePromotions = $promoC->pagination($page, $perpage);
+                            $listepromos = $promoC->pagination($page, $perpage);
                             $totalP = $promoC->calcTotalRows($perpage);
 
-                        ?>
 
-                  <?PHP
+                            //recherche
 
-                        
                             if(isset($_GET['recherche']))
                             {
                                 $search_value=$_GET["recherche"];
-                                $listePromos=$promoC->recherche($search_value);
+                                $listepromos=$promoC->recherche($search_value);
                             }
+
+                            //trie
                             if(isset($_GET['trie']))
                             {
-                                $listePromos = $promoC->trieCroissant($page, $perpage);
+                                $listepromos = $promoC->trieCroissant($page, $perpage);
                             }
-
+                            
                         ?> 
 
-                      <div class="card shadow mb-4">
+                        <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-primary">Tableau des promotions</h6>
                             </div>
@@ -98,15 +98,15 @@ session_start();
                                     <div class="row">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
-                                <tr>
+                                                <tr>
                                     <th>id</th>
-                                    <th>nom_Promo</th>
+                                    <th>nomPromo</th>
                                     <th>pourcentage</th>
                                     <th>id_plat</th>
-   <th colspan="2">
-                               <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="afficherPlats.php">
+                                    <th colspan="2">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="get" action="afficherPromos.php">
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher un plat"
+                                                                <input type="text" class="form-control bg-light border-0 small" placeholder="Rechercher une promotions"
                                                                     aria-label="Search" aria-describedby="basic-addon2" name="recherche">
                                                                 <div class="input-group-append">
                                                                     <button class="btn btn-primary" type="submit" value="Chercher">
@@ -127,16 +127,17 @@ session_start();
      <tbody>
 
                             <?PHP
-                                foreach ($listePromotions as $row) {
+                                foreach ($listepromos as $row) {
                             ?>
 
-                             <tr>
+                            <tr>
                                 <td><?PHP echo $row['id'];?></td>
                                 <td><?PHP echo $row['nomPromo']; ?></td>
                                 <td><?PHP echo $row['pourcentage']; ?></td>
-                                <td><?PHP echo $row['id_plat']; ?></td>
-                              
-                                <td>
+                                <td><?PHP echo $row['id_plat']; ?></td>                           
+                            
+
+                                 <td>
                                     <form method="POST" action="supprimerPromo.php">
                                         <input type="submit" name="supprimer" value="supprimer" class="btn btn-danger">
                                         <input type="hidden" value="<?PHP echo $row['id']; ?>" name="id">
@@ -144,16 +145,16 @@ session_start();
                                 </td>
                                 <td>
                                     <a  class="btn btn-primary" href="modifierPromo.php?id=<?PHP echo $row['id']; ?>"> Modifier </a>
-                                </td>
-                            </tr>
+                                                </td>
+                                                </tr>
 
-                            <?PHP
-                                }
-                            ?>
- </tbody>
-                        </table>
+                                                <?PHP
+                                                    }
+                                                ?>
+                                            </tbody>
 
-                       </div>
+                                       </table>
+                                    </div>
 
                                     <div class="row">
                                         <nav>
@@ -198,18 +199,6 @@ session_start();
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
-
-    </body>
-
-</html>
-
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <!-- Core plugin JavaScript-->

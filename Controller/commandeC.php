@@ -133,7 +133,7 @@
         public function trieCroissant($page, $perPage)
         {
             $start = ($page > 1) ? ($page * $perPage) - $perPage : 0;
-            $sql = "SELECT * FROM commande order by idcommande LIMIT {$start},{$perPage} ";
+            $sql = "SELECT * FROM commande order by nomclient LIMIT {$start},{$perPage} ";
             $db = config::getConnexion();
             try {
                 $liste = $db->prepare($sql);

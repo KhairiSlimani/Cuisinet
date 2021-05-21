@@ -15,7 +15,10 @@ if (
         !empty($_POST["password"]) 
     ) {
 
-		if($adminC->connecterAdmin($_POST["username"] , $_POST["password"]) != false)
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        
+		if( ($adminC->connecterAdmin($_POST["username"] , $_POST["password"]) != false) && ($username != "client") )
 		{
 			session_start();
             $admin=$adminC->recupererAdminUS($_POST["username"]);        

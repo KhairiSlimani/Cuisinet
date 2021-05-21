@@ -36,7 +36,6 @@
             }
         }
 
-
         public function supprimerReservation($idres)
         {
             $sql = "DELETE FROM reservation WHERE idres = :idres";

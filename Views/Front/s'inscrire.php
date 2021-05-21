@@ -92,12 +92,12 @@
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" name="password" id="password" class="form-control" placeholder="Mot de passe">
+									<input type="password" name="password" id="password" class="form-control" placeholder="Mot de passe">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<input type="text" name="confirmation" id="confirmation" class="form-control" placeholder="Répéter Le Mot de passe">
+									<input type="password" name="confirmation" id="confirmation" class="form-control" placeholder="Répéter Le Mot de passe">
 								</div>
 							</div>
 							<div class="col-md-12">

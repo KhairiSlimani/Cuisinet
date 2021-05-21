@@ -63,6 +63,7 @@ if (
 	
 	<link rel="stylesheet" href="css/flaticon.css">
 	<link rel="stylesheet" href="css/style.css">
+	<script src="js/controleSaisieMod.js"></script>
 </head>
 <body>
 
@@ -76,7 +77,7 @@ if (
 				<div class="col-sm-4 p-4 p-md-5 d-flex align-items-center justify-content-center bg-primary">
 
 
-					<form id="myForm" action="" class="appointment-form" method="post">
+					<form id="form" action="" class="appointment-form" method="post">
 						<h3 class="mb-3">PROFIL</h3>
 						<div class="row">
 
@@ -95,7 +96,7 @@ if (
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" value="<?PHP echo $client['email']; ?>" >
+                                    <input type="text" name="email" class="form-control" value="<?PHP echo $client['email']; ?>" >
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -105,12 +106,17 @@ if (
                             </div>
                             <div class="col-md-12">
 								<div class="form-group">
-									<input id="enregistrer" type="submit" value="Enregistrer" name="Enregistrer" class="btn btn-white py-3 px-4">
+									<input id="enregistrer" type="submit" value="Enregistrer" name="Enregistrer" onclick="verif();" class="btn btn-white py-3 px-4">
 								</div>
 							</div>
 
+							
+
 						</div>
 					</form>
+
+					<div id="erreur">  </div>
+
 						<!-- <a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex justify-content-center align-items-center">
   						<span class="ion-ios-play"></span>
   					</a> -->
